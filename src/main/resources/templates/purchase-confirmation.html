@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purchase Confirmation</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/dist/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Purchase Confirmation</h2>
+
+    <div class="alert alert-success" role="alert">
+        <strong>Success!</strong> Your purchase has been submitted successfully.
+    </div>
+
+    <!-- Link back to the purchase form -->
+    <a th:href="@{/}" class="btn btn-primary">Return to Menu</a>
+</div>
+
+<!-- Include Bootstrap JS and Popper.js (required for certain Bootstrap components) -->
+<script th:src="@{/webjars/bootstrap/5.2.0/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

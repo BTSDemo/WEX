@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purchase Form</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/dist/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        
+        .form-control {
+		    width: 30%;
+		    display: inline-block;
+		    box-sizing: border-box;
+		}
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Purchase Form</h2>
+
+    <form th:action="@{/save-purchase}" th:object="${purchase}" method="post">
+
+        <!-- Description -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <input type="text" class="form-control" id="description" name="description" required th:field="*{description}" maxlength="50" />
+        </div>
+
+        <!-- Transaction Date -->
+        <div class="mb-3">
+            <label for="transactionDate" class="form-label">Transaction Date:</label>
+            <input type="date" class="form-control" id="transactionDate" name="transactionDate" required th:field="*{transactionDate}" pattern="\d{2}-\d{2}-\d{4}" title="Enter a valid date (DD-MM-YYYY)" oninput="validateDateInput(this)"/>
+        </div>
+
+        <!-- Purchase Amount -->
+        <div class="mb-3">
+            <label for="purchaseAmount" class="form-label">Purchase Amount (USD):</label>
+            <input type="number" class="form-control" id="purchaseAmount" name="purchaseAmount" step="0.01" min="0.01" required th:field="*{purchaseAmount}" >
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+<!-- Include Bootstrap JS and Popper.js (required for certain Bootstrap components) -->
+<script th:src="@{/webjars/bootstrap/5.2.0/dist/js/bootstrap.bundle.min.js}"></script>
+<script>
+    function validateDateInput(input) {
+        // Validate the input against the specified pattern
+        if (!input.checkValidity()) {
+            // If the input is invalid, set a custom validity message
+            input.setCustomValidity('Enter a valid date (DD-MM-YYYY)');
+        } else {
+            // If the input is valid, clear any custom validity message
+            input.setCustomValidity('');
+        }
+    }
+</script>
+</body>
+</html>

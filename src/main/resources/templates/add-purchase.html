@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Purchase</title>
+    
+    <!-- Include Bootstrap CSS here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<div class="container mt-4">
+    <h2>Add Purchase</h2>
+
+    <form th:action="@{/purchases/add}" th:object="${purchase}" method="post">
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" id="description" th:field="*{description}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="transactionDate">Transaction Date:</label>
+            <input type="date" class="form-control" id="transactionDate" th:field="*{transactionDate}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="purchaseAmount">Purchase Amount:</label>
+            <input type="number" step="0.01" class="form-control" id="purchaseAmount" th:field="*{purchaseAmount}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Purchase</button>
+    </form>
+</div>
+
+<!-- Include Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8Wv5UkuFvl" 
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy4Ck6Y72l5N4pDnDZl+2uUWr1Ph/gDaU" 
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purchase List</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/dist/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Purchase List</h2>
+
+    <!-- Table to display purchase details -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Description</th>
+            <th scope="col">Transaction Date</th>
+            <th scope="col">Purchase Amount</th>
+            <th scope="col">Convert To Another Currency</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate through purchases and display details -->
+        <tr th:each="purchase : ${purchases}">
+            <td th:text="${purchase.id}"></td>
+            <td th:text="${purchase.description}"></td>
+            <td th:text="${#temporals.format(purchase.transactionDate, 'dd-MM-yyyy')}"></td>
+            <td th:text="${purchase.purchaseAmount}"></td>
+            <td><a th:href="@{/convert-currency/{purchaseId}(purchaseId=${purchase.id})}" class="btn btn-primary">Convert</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Link back to the main menu -->
+    <a th:href="@{/}" class="btn btn-primary">Return to Menu</a>
+</div>
+
+<!-- Include Bootstrap JS and Popper.js (required for certain Bootstrap components) -->
+<script th:src="@{/webjars/bootstrap/5.2.0/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Currency Conversion Result</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/dist/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .container-result {
+            margin-top: 20px;
+            border: 1px solid #007bff;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .alert {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .alert-heading {
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">Currency Conversion Result</h2>
+
+	<!-- Display Error -->
+	<div th:if="${errorMessage}" class="alert alert-danger">
+	    <h4 class="alert-heading">Error</h4>
+	    <p th:text="${errorMessage}"></p>
+	</div>
+	
+    <!-- Display purchase details -->
+    <div class="mb-3">
+        <label for="purchaseId" class="form-label">Purchase ID:</label>
+        <input type="text" class="form-control" id="purchaseId" name="purchaseId" readonly th:value="${purchase.id}" />
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <input type="text" class="form-control" id="description" name="description" readonly th:value="${purchase.description}" />
+    </div>
+    <div class="mb-3">
+        <label for="transactionDate" class="form-label">Transaction Date:</label>
+        <input type="text" class="form-control" id="transactionDate" name="transactionDate" readonly th:value="${#temporals.format(purchase.transactionDate, 'dd-MM-yyyy')}" />
+    </div>
+    <div class="mb-3">
+        <label for="purchaseAmount" class="form-label">Purchase Amount (USD):</label>
+        <input type="text" class="form-control" id="purchaseAmount" name="purchaseAmount" readonly th:value="${purchase.purchaseAmount}" />
+    </div>
+    <div class="mb-3">
+        <label for="selectedCurrency" class="form-label">Selected Currency:</label>
+        <input type="text" class="form-control" id="selectedCurrency" name="selectedCurrency" readonly th:value="${selectedCurrency}" />
+    </div>
+
+	<!-- Display Conversion Details -->
+    <div th:if="${conversionDetails}" class="container-result">
+        <div class="mb-3">
+            <label for="conversionRate" class="form-label">Conversion Rate:</label>
+            <input type="text" class="form-control" id="conversionRate" name="conversionRate" readonly th:value="${conversionDetails.conversionRate}" />
+        </div>
+        <div class="mb-3">
+            <label for="convertedAmount" class="form-label">Converted Amount:</label>
+            <input type="text" class="form-control" id="convertedAmount" name="convertedAmount" readonly th:value="${conversionDetails.convertedAmount}" />
+        </div>
+    </div>
+
+</div>
+
+<!-- Link back to main menu -->
+<a th:href="@{/convert-currency/{purchaseId}(purchaseId=${purchase.id})}" class="btn btn-primary">Convert to Another Currency</a>
+<br/>
+<!-- Link back to main menu -->
+<a th:href="@{/}" class="btn btn-primary">Return to Menu</a>
+
+<!-- Include Bootstrap JS and Popper.js -->
+<script th:src="@{/webjars/bootstrap/5.2.0/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
